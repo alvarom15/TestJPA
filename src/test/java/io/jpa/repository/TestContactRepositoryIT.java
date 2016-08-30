@@ -27,9 +27,10 @@ public class TestContactRepositoryIT {
 	}
 	
 	@Test
-	@Rollback(value = true)
+	@Rollback(value = false)
 	public void should_insert_contact() {
 		System.out.println("TESTING");
+		long countOrig = contactRepository.count();
 		Contact contact = createContact("Alvaro");
 		Contact contact2 = createContact("Antonio");
 		Contact contact3 = createContact("Angel");
@@ -41,7 +42,7 @@ public class TestContactRepositoryIT {
 		contactRepository.save(contact4);
 		
 		long count = contactRepository.count();
-		Assert.assertEquals(4, count);
+		Assert.assertEquals(4, count-countOrig);
 	}
 	
 	
